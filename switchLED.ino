@@ -1,13 +1,15 @@
 
 
-#define SIZE 7
+#define SIZE 10
 #define BLINKING 70
 #define SHN_RELEASE 200;
 
 char buffer[5];
-byte LED[SIZE] = {52,46,44,38,36,30,28};
-byte BTN[SIZE] = {50,48,42,40,34,32,26};
-bool ST[SIZE] = {false,false,false,false,false,false,false};
+byte LED[SIZE] = {26,28,32,34,38,40,44,46,50,52};
+byte BTN[SIZE] = {27,29,33,35,39,41,45,47,51,53};
+//byte LED[SIZE] = {26,28,32,34,38,40,44};
+//byte BTN[SIZE] = {27,29,33,35,39,41,45};
+bool ST[SIZE] = {false,false,false,false,false,false,false,false,false,false};
 byte SHUTTER_PIN = 10;
 byte FOCUS_PIN = 9;
 
@@ -58,6 +60,7 @@ void numOn(char n){
 void randomOn(){
   int n = random(0,SIZE); 
   numOn(n);
+  //ST[n] = true;
 }
 void offAll(){
   CUR = -1;
@@ -169,11 +172,14 @@ void loop() {
                 offAll();
                 CUR=-1;
               }
-             
+
+           //Button of from GameUI for general
            }else if(inData.substring(0,2)=="bo"){
               char n = inData.charAt(2)-49;
               numOn(n);
-              
+
+
+           //Button off from GameUI for testing
            }else if(inData.substring(0,2)=="bf"){
               char n = inData.charAt(2)-49;
               if(ST[n]) {
